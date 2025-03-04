@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro Focus - Home</title>
+    <link rel="stylesheet" href="\static\css\style.css">
+    <script>
+        // When the user clicks on <div>, open the popup
+        function setting() {
+          var popup = document.getElementById("myPopup");
+          popup.classList.toggle("show");
+        }
+        </script>
+</head>
+<body>
+    <!-- Home Page -->
+    <div id="home-page" class="container">
+        <nav class="navbar">
+            <div class="nav-logo">
+                <span>⏱️</span>
+                <span>PomodoroFocus</span>
+            </div>
+            <div class="nav-links">
+                <a href="\templates\home.html" class="nav-link active">Home</a>
+                <div class="popup" onclick="setting()">Settings
+                    <span class="popuptext" id="myPopup">Popup text...</span>
+                  </div>
+                <a href="#" class="nav-link" id="settings-link">Settings</a>
+            </div>
+        </nav>
+        
+
+        <div class="main-content">
+            <div class="action-cards">
+                <div class="card" id="pomodoro-card">
+                    <div class="card-icon">⏱️</div>
+                    <h2 class="card-title">Start Pomodoro Session</h2>
+                    <p class="card-description">Focus on your tasks with timed work sessions</p>
+                    <button class="action-btn">Start Session</button>
+                </div>
+                
+                <div class="card" id="journal-card">
+                    <div class="card-icon">📝</div>
+                    <h2 class="card-title">Journal</h2>
+                    <p class="card-description">Log your productivity and energy levels</p>
+                    <button class="action-btn">Open Journal</button>
+                </div>
+                
+                <div class="card" id="stats-card">
+                    <div class="card-icon">📊</div>
+                    <h2 class="card-title">Statistics</h2>
+                    <p class="card-description">View graphical progress of your tasks</p>
+                    <button class="action-btn">View Stats</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="close-modal">&times;</span>
+            <h2>Settings</h2>
+            
+            <div class="settings-section">
+                <h3>Timer Settings</h3>
+                <div class="setting-item">
+                    <label for="pomodoro-time">Pomodoro Duration (minutes):</label>
+                    <input type="number" id="pomodoro-time" min="1" max="60" value="25">
+                </div>
+                <div class="setting-item">
+                    <label for="short-break">Short Break (minutes):</label>
+                    <input type="number" id="short-break" min="1" max="30" value="5">
+                </div>
+                <div class="setting-item">
+                    <label for="long-break">Long Break (minutes):</label>
+                    <input type="number" id="long-break" min="1" max="60" value="15">
+                </div>
+            </div>
+            
+            <div class="settings-section">
+                <h3>Notification Settings</h3>
+                <div class="setting-item checkbox">
+                    <input type="checkbox" id="enable-notifications" checked>
+                    <label for="enable-notifications">Enable Notifications</label>
+                </div>
+                <div class="setting-item checkbox">
+                    <input type="checkbox" id="enable-sounds" checked>
+                    <label for="enable-sounds">Enable Sound Alerts</label>
+                </div>
+            </div>
+            
+            <button class="save-settings-btn">Save Settings</button>
+        </div>
+    </div>
+
+    <script src="\static\js\script.js"></script>
+</body>
+</html>

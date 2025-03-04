@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro Timer</title>
+    <link rel="stylesheet" href="\static\css\style.css">
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar">
+            <div class="nav-logo">
+                <span>⏱️</span>
+                <span>PomodoroFocus</span>
+            </div>
+            <div class="nav-links">
+                <a href="\templates\home.html" class="nav-link active">Home</a>
+                <a href="#" class="nav-link" id="settings-link">Settings</a>
+            </div>
+        </nav>
+        
+        <div class="timer-container">
+            <div class="timer-card">
+                <h2 class="timer-label" id="session-type">Focus Session</h2>
+                <div class="timer-display" id="timer">25:00</div>
+                <div class="timer-progress">
+                    <div class="timer-progress-bar" id="progress-bar" style="width: 0%"></div>
+                </div>
+                <div class="timer-controls">
+                    <button class="timer-btn pause-btn" id="pause-btn">Start</button>
+                    <button class="timer-btn add-time-btn" id="add-time-btn">+5 Minutes</button>
+                    <button class="timer-btn finish-btn" id="finish-btn">Finish Early</button>
+                </div>
+                <div class="session-info">
+                    Session <span id="current-session">1</span> of <span id="total-sessions">4</span> • Break in <span id="break-time">25:00</span>
+                </div>
+                <a href="#" class="settings-link" id="settings-link">Customize Timer Settings</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal" id="settings-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Timer Settings</h3>
+                <span class="close-btn" id="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Focus Duration (minutes)</label>
+                    <input type="number" class="form-input" id="focus-input" value="25" min="1" max="60">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Short Break Duration (minutes)</label>
+                    <input type="number" class="form-input" id="short-break-input" value="5" min="1" max="30">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Long Break Duration (minutes)</label>
+                    <input type="number" class="form-input" id="long-break-input" value="15" min="1" max="60">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Sessions Before Long Break</label>
+                    <input type="number" class="form-input" id="sessions-input" value="4" min="1" max="10">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="timer-btn finish-btn" id="cancel-settings">Cancel</button>
+                <button class="timer-btn pause-btn" id="save-settings">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/script.js"></script>
+</body>
+</html>

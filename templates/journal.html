@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskNotes | Task Manager & Note Taking App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    
+</head>
+<body>
+    <div class="container">
+        <!-- Navbar -->
+        <nav class="navbar">
+            <div class="nav-logo">
+                <span>⏱️</span>
+                <span>PomodoroFocus</span>
+            </div>
+            <div class="nav-links">
+                <a href="#" class="nav-link active">Tasks</a>
+                <a href="#" class="nav-link">Notes</a>
+                <a href="#" class="nav-link">Stats</a>
+                <a href="#" class="nav-link" id="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Tasks Section -->
+            <div id="tasks-section">
+                <div class="task-header">
+                    <h1 class="task-title">My Tasks</h1>
+                </div>
+
+                <div class="search-container">
+                    <input type="text" id="task-search" class="search-input" placeholder="Search tasks...">
+                    <i class="fas fa-search search-icon"></i>
+                </div>
+                
+                <div class="task-filters">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="active">Active</button>
+                    <button class="filter-btn" data-filter="completed">Completed</button>
+                </div>
+
+                <form id="task-form" class="task-form">
+                    <input type="text" id="task-input" class="task-input" placeholder="Add a new task...">
+                    <button type="submit" class="add-task-btn">
+                        <i class="fas fa-plus"></i> Add Task
+                    </button>
+                </form>
+
+                <ul id="task-list" class="task-list">
+                    <!-- Tasks will be added here dynamically -->
+                </ul>
+
+                <div class="empty-state" id="empty-tasks" style="display: none;">
+                    <i class="fas fa-tasks empty-icon"></i>
+                    <h3 class="empty-title">No tasks yet</h3>
+                    <p class="empty-description">Create your first task to get started</p>
+                    <button class="empty-action-btn">Add New Task</button>
+                </div>
+
+                <div class="task-stats">
+                    <div class="task-stat">
+                        <div class="stat-value" id="total-tasks">0</div>
+                        <div class="stat-label">Total Tasks</div>
+                    </div>
+                    <div class="task-stat">
+                        <div class="stat-value" id="completed-tasks">0</div>
+                        <div class="stat-label">Completed</div>
+                    </div>
+                    <div class="task-stat">
+                        <div class="stat-value" id="active-tasks">0</div>
+                        <div class="stat-label">Active</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notes Section -->
+            <div id="notes-section" style="display: none;">
+                <div class="task-header">
+                    <h1 class="task-title">My Notes</h1>
+                </div>
+
+                <div class="search-container">
+                    <input type="text" id="note-search" class="search-input" placeholder="Search notes...">
+                    <i class="fas fa-search search-icon"></i>
+                </div>
+
+                <div class="notes-container" id="notes-container">
+                    <div class="add-note-card" id="add-note-btn">
+                        <i class="fas fa-plus add-note-icon"></i>
+                        <p class="add-note-text">Add a new note</p>
+                    </div>
+                    <!-- Notes will be added here dynamically -->
+                </div>
+
+                <div class="empty-state" id="empty-notes" style="display: none;">
+                    <i class="fas fa-sticky-note empty-icon"></i>
+                    <h3 class="empty-title">No notes yet</h3>
+                    <p class="empty-description">Create your first note to get started</p>
+                    <button class="empty-action-btn">Add New Note</button>
+                </div>
+            </div>
+
+            <!-- Stats Section -->
+            <div id="stats-section" style="display: none;">
+                <div class="task-header">
+                    <h1 class="task-title">Productivity Stats</h1>
+                </div>
+                
+                <div class="task-stats">
+                    <div class="task-stat">
+                        <div class="stat-value" id="stat-total-tasks">0</div>
+                        <div class="stat-label">Total Tasks</div>
+                    </div>
+                    <div class="task-stat">
+                        <div class="stat-value" id="stat-completed-tasks">0</div>
+                        <div class="stat-label">Completed Tasks</div>
+                    </div>
+                    <div class="task-stat">
+                        <div class="stat-value" id="stat-completion-rate">0%</div>
+                        <div class="stat-label">Completion Rate</div>
+                    </div>
+                    <div class="task-stat">
+                        <div class="stat-value" id="stat-total-notes">0</div>
+                        <div class="stat-label">Total Notes</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Note Editor Modal -->
+    <div class="note-editor" id="note-editor">
+        <div class="editor-container">
+            <div class="editor-header">
+                <input type="text" class="editor-title-input" id="note-title" placeholder="Title">
+                <button class="editor-close-btn" id="close-editor">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="editor-body">
+                <textarea class="editor-textarea" id="note-content" placeholder="Write your note here..."></textarea>
+            </div>
+            <div class="editor-footer">
+                <div class="editor-tools">
+                    <div class="note-color-picker">
+                        <div class="color-option color-default" data-color="default"></div>
+                        <div class="color-option color-red" data-color="red"></div>
+                        <div class="color-option color-orange" data-color="orange"></div>
+                        <div class="color-option color-yellow" data-color="yellow"></div>
+                        <div class="color-option color-green" data-color="green"></div>
+                        <div class="color-option color-blue" data-color="blue"></div>
+                        <div class="color-option color-purple" data-color="purple"></div>
+                    </div>
+                </div>
+                <button class="editor-save-btn" id="save-note">Save Note</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/script.js"></script>
+</body>
+</html>
