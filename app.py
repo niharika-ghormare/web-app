@@ -7,7 +7,7 @@ import os
 app = Flask(__name__)
 
 # Secure MongoDB connection
-MONGO_URI = os.getenv("MONGO_URI", "mongodb+srv://niharikaghormare123:niharikaghormaere123@cluster0.vuvza.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+MONGO_URI = os.getenv("MONGO_URI", "")
 client = MongoClient(MONGO_URI)
 db = client["Webapp"]  # Database name
 users_collection = db["Data"]  # Collection for storing users
