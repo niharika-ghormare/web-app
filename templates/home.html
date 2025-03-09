@@ -11,7 +11,8 @@
           var popup = document.getElementById("myPopup");
           popup.classList.toggle("show");
         }
-        </script>
+    </script>
+    
 </head>
 <body>
     <!-- Home Page -->
@@ -22,13 +23,35 @@
                 <span>PomodoroFocus</span>
             </div>
             <div class="nav-links">
-                <a href="\templates\home.html" class="nav-link active">Home</a>
-                <div class="popup" onclick="setting()">Settings
-                    <span class="popuptext" id="myPopup">Popup text...</span>
-                  </div>
+                <a href="\home" class="nav-link active">Home</a>
                 <a href="#" class="nav-link" id="settings-link">Settings</a>
             </div>
         </nav>
+        <!-- Settings Modal -->
+        <div id="settings-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn" id="close-modal">&times;</span>
+                <h2>Settings</h2>
+                <!-- Authentication section -->
+                <div class="auth-section">
+                    <h3>Account</h3>
+                    <div id="login-status">
+                        <!-- This will be dynamically filled based on auth status -->
+                    </div>
+                </div>
+                <h3>Select Theme Color</h3>
+        
+                <div class="color-options">
+                    <div class="color-option selected" data-theme="light" style="background-color: #ecc86e;"></div>
+                    <div class="color-option" data-theme="dark" style="background-color: #222233;"></div>
+                    <div class="color-option" data-theme="focus" style="background-color: #74cdfa;"></div>
+                    <div class="color-option" data-theme="nature" style="background-color: #1d4816;"></div>
+                    <div class="color-option" data-theme="sun" style="background-color: #2c3e50;"></div>
+                </div>
+                <button class="save-button">Save Theme</button>
+                
+            </div>
+        </div>
         
 
         <div class="main-content">
@@ -62,6 +85,71 @@
             <span class="close-btn" id="close-modal">&times;</span>
             <h2>Settings</h2>
             
+            <!-- Authentication Section -->
+            <div class="settings-section auth-section">
+                <h3>Account</h3>
+                
+                <!-- Guest View (shown when not logged in) -->
+                <div id="guest-auth-options" style="display: none;">
+                    <p>You are currently using the app as a guest. Log in to save your settings and progress.</p>
+                    <div class="auth-buttons">
+                        <a href="/login" class="btn login-btn">Log In</a>
+                        <a href="/signup" class="btn signup-btn">Sign Up</a>
+                    </div>
+                </div>
+                
+                <!-- Logged In View (shown when logged in) -->
+                <div id="user-auth-options" style="display: none;">
+                    <p>Logged in as <span id="username">User</span></p>
+                    <a href="/logout" class="btn logout-btn">Log Out</a>
+                </div>
+            </div>
+            
+            <!-- Theme Customization Section -->
+            <div class="settings-section" id="theme-settings">
+                <h3>Appearance</h3>
+                <div class="setting-item">
+                    <label>Theme:</label>
+                    <div class="theme-selector">
+                        <div class="theme-option" data-theme="light">
+                            <span class="color-box light-theme"></span>
+                            <span>Light</span>
+                        </div>
+                        <div class="theme-option" data-theme="dark">
+                            <span class="color-box dark-theme"></span>
+                            <span>Dark</span>
+                        </div>
+                        <div class="theme-option" data-theme="focus">
+                            <span class="color-box focus-theme"></span>
+                            <span>Focus</span>
+                        </div>
+                        <div class="theme-option" data-theme="nature">
+                            <span class="color-box nature-theme"></span>
+                            <span>Nature</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="setting-item">
+                    <label>Accent Color:</label>
+                    <div class="color-selector">
+                        <div class="color-option" data-color="#e74c3c"><span class="color-box" style="background-color: #e74c3c;"></span></div>
+                        <div class="color-option" data-color="#3498db"><span class="color-box" style="background-color: #3498db;"></span></div>
+                        <div class="color-option" data-color="#2ecc71"><span class="color-box" style="background-color: #2ecc71;"></span></div>
+                        <div class="color-option" data-color="#f39c12"><span class="color-box" style="background-color: #f39c12;"></span></div>
+                        <div class="color-option" data-color="#9b59b6"><span class="color-box" style="background-color: #9b59b6;"></span></div>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="save-settings-btn">Save Settings</button>
+        </div>
+    </div>
+    <div id="settings-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="close-modal">&times;</span>
+            <h2>Settings</h2>
+            
             <div class="settings-section">
                 <h3>Timer Settings</h3>
                 <div class="setting-item">
@@ -77,7 +165,6 @@
                     <input type="number" id="long-break" min="1" max="60" value="15">
                 </div>
             </div>
-            
             <div class="settings-section">
                 <h3>Notification Settings</h3>
                 <div class="setting-item checkbox">
@@ -89,11 +176,29 @@
                     <label for="enable-sounds">Enable Sound Alerts</label>
                 </div>
             </div>
-            
             <button class="save-settings-btn">Save Settings</button>
         </div>
     </div>
 
+    <script>
+        document.getElementById("settings-link").addEventListener("click", function(event) {
+            event.preventDefault();
+            document.getElementById("settings-modal").style.display = "block";
+        });
+
+        document.getElementById("close-modal").addEventListener("click", function() {
+            document.getElementById("settings-modal").style.display = "none";
+        });
+
+        window.onclick = function(event) {
+            var modal = document.getElementById("settings-modal");
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        };
+    </script>
+
     <script src="\static\js\script.js"></script>
+    <script src="\static\js\setting.js"></script>
 </body>
 </html>

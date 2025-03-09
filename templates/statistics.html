@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskNotes | Stats Section</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script>
+        // When the user clicks on <div>, open the popup
+        function setting() {
+          var popup = document.getElementById("myPopup");
+          popup.classList.toggle("show");
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- Main Content -->
+        <div class="main-content">
+            <nav class="navbar">
+                <div class="nav-logo">
+                    <span>⏱️</span>
+                    <span>PomodoroFocus</span>
+                </div>
+                <div class="nav-links">
+                    <a href="\home" class="nav-link active">Home</a>
+                    <a href="#" class="nav-link" id="settings-link">Settings</a>
+                </div>
+            </nav>
+            <div id="settings-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close-btn" id="close-modal">&times;</span>
+                    <h2>Settings</h2>
+                    <!-- Authentication section -->
+                    <div class="auth-section">
+                        <h3>Account</h3>
+                        <div id="login-status">
+                            <!-- This will be dynamically filled based on auth status -->
+                        </div>
+                    </div>
+                    <h3>Select Theme Color</h3>
+            
+                    <div class="color-options">
+                        <div class="color-option selected" data-theme="light" style="background-color: #f8f9fa;"></div>
+                        <div class="color-option" data-theme="dark" style="background-color: #222233;"></div>
+                        <div class="color-option" data-theme="focus" style="background-color: #103040;"></div>
+                        <div class="color-option" data-theme="nature" style="background-color: #f2f7ee;"></div>
+                        <div class="color-option" data-theme="nature" style="background-color: #96bdcf;"></div>
+                    </div>
+                    <button class="save-button">Save Theme</button>
+                    
+                </div>
+            </div>
+            
+            <!-- Stats Section -->
+            <div id="stats-section">
+                <div class="task-header">
+                    <h1 class="task-title">Productivity Stats</h1>
+                </div>
+                
+                <div class="task-stats">
+                    <div class="task-stat">
+                        <div class="stat-value" id="stat-total-tasks">0</div>
+                        <div class="stat-label">Total Tasks</div>
+                    </div>
+                    <div class="task-stat">
+                        <div class="stat-value" id="stat-completed-tasks">0</div>
+                        <div class="stat-label">Completed Tasks</div>
+                    </div>
+                    <div class="task-stat">
+                        <div class="stat-value" id="stat-completion-rate">0%</div>
+                        <div class="stat-label">Completion Rate</div>
+                    </div>
+                    <div class="task-stat">
+                        <div class="stat-value" id="stat-total-notes">0</div>
+                        <div class="stat-label">Total Notes</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Hidden elements needed for JavaScript compatibility -->
+            <div id="tasks-section" style="display:none;">
+                <div id="total-tasks" style="display:none;">0</div>
+                <div id="completed-tasks" style="display:none;">0</div>
+                <div id="active-tasks" style="display:none;">0</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modified script for stats only -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        updateStats();
+    });
+
+    // Simplified update stats function
+    function updateStats() {
+        try {
+            // Get latest data from localStorage
+            const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            const notes = JSON.parse(localStorage.getItem('notes')) || [];
+            
+            const totalTasks = tasks.length;
+            const completedTasks = tasks.filter(task => task.completed).length;
+            const completionRate = totalTasks ? Math.round((completedTasks / totalTasks) * 100) : 0;
+            const totalNotes = notes.length;
+            
+            // Update the stats elements
+            document.getElementById('stat-total-tasks').textContent = totalTasks;
+            document.getElementById('stat-completed-tasks').textContent = completedTasks;
+            document.getElementById('stat-completion-rate').textContent = `${completionRate}%`;
+            document.getElementById('stat-total-notes').textContent = totalNotes;
+            
+            // Update hidden elements for compatibility
+            document.getElementById('total-tasks').textContent = totalTasks;
+            document.getElementById('completed-tasks').textContent = completedTasks;
+            document.getElementById('active-tasks').textContent = totalTasks - completedTasks;
+            
+        } catch (error) {
+            console.error('Error in updateStats:', error);
+        }
+    }
+    </script>
+    <script src="/static/js/statistics.js"></script>
+    <script src="/static/js/setting.js"></script>
+</body>
+</html>

@@ -6,6 +6,13 @@
     <title>TaskNotes | Task Manager & Note Taking App</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="/static/css/style.css">
+    <script>
+        // When the user clicks on <div>, open the popup
+        function setting() {
+          var popup = document.getElementById("myPopup");
+          popup.classList.toggle("show");
+        }
+    </script>
     
 </head>
 <body>
@@ -17,15 +24,38 @@
                 <span>PomodoroFocus</span>
             </div>
             <div class="nav-links">
+                <a href="/home" class="nav-link active">Home</a>
                 <a href="#" class="nav-link active">Tasks</a>
                 <a href="#" class="nav-link">Notes</a>
-                <a href="#" class="nav-link">Stats</a>
-                <a href="#" class="nav-link" id="theme-toggle">
-                    <i class="fas fa-moon"></i>
-                </a>
+                <a href="#" class="nav-link" id="settings-link">Settings</a>
+                
             </div>
         </nav>
-
+        <div id="settings-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn" id="close-modal">&times;</span>
+                <h2>Settings</h2>
+                <!-- Authentication section -->
+                <div class="auth-section">
+                    <h3>Account</h3>
+                    <div id="login-status">
+                        <!-- This will be dynamically filled based on auth status -->
+                    </div>
+                </div>
+                <h3>Select Theme Color</h3>
+        
+                <div class="color-options">
+                    <div class="color-option selected" data-theme="light" style="background-color: #f8f9fa;"></div>
+                    <div class="color-option" data-theme="dark" style="background-color: #222233;"></div>
+                    <div class="color-option" data-theme="focus" style="background-color: #103040;"></div>
+                    <div class="color-option" data-theme="nature" style="background-color: #f2f7ee;"></div>
+                    <div class="color-option" data-theme="nature" style="background-color: #96bdcf;"></div>
+                </div>
+                <button class="save-button">Save Theme</button>
+                
+            </div>
+        </div>
+        
         <!-- Main Content -->
         <div class="main-content">
             <!-- Tasks Section -->
@@ -163,6 +193,7 @@
         </div>
     </div>
 
-    <script src="/static/js/script.js"></script>
+    <script src="/static/js/journal.js"></script>
+    <script src="/static/js/setting.js"></script>
 </body>
 </html>

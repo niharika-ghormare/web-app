@@ -2,351 +2,233 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pomodoro Focus</title>
+    <title>Pomofocus</title>
     <style>
-        /* Global Styles */
-        :root {
-            --primary-color: #ff6347;
-            --secondary-color: #4a90e2;
-            --background-color: #f5f5f5;
-            --text-color: #333;
-            --card-bg: #ffffff;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: Arial, sans-serif;
+            background-color: #d95550;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             margin: 0;
-            padding: 0;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            transition: all 0.3s ease;
+            color: white;
         }
-
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 10px;
             padding: 20px;
-        }
-
-        /* Welcome Page Styles */
-        .welcome-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
+            width: 350px;
             text-align: center;
         }
-
-        .logo-container {
-            margin-bottom: 40px;
-        }
-
-        .logo {
-            width: 150px;
-            height: 150px;
-            background-color: var(--primary-color);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto;
-            box-shadow: var(--shadow);
-        }
-
-        .logo-icon {
+        .timer {
             font-size: 80px;
-            color: white;
+            margin: 20px 0;
         }
-
-        .title {
-            font-size: 3rem;
-            margin-top: 10px;
-            color: var(--primary-color);
-        }
-
-        .subtitle {
-            font-size: 1.2rem;
-            margin-bottom: 40px;
-            color: #777;
-        }
-
-        .auth-container {
-            width: 100%;
-            max-width: 400px;
+        .mode-buttons {
             display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .auth-btn, .guest-btn {
-            padding: 15px 20px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .auth-btn {
-            background-color: var(--primary-color);
-            color: white;
-        }
-
-        .auth-btn:hover {
-            background-color: #e55a40;
-            transform: translateY(-2px);
-        }
-
-        .guest-btn {
-            background-color: transparent;
-            border: 2px solid var(--primary-color);
-            color: var(--primary-color);
-        }
-
-        .guest-btn:hover {
-            background-color: rgba(255, 99, 71, 0.1);
-            transform: translateY(-2px);
-        }
-
-        /* Home Page Styles */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: var(--card-bg);
-            padding: 15px 20px;
-            box-shadow: var(--shadow);
-            border-radius: 8px;
-            margin-bottom: 30px;
-        }
-
-        .nav-logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: var(--primary-color);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 20px;
-        }
-
-        .nav-link {
-            text-decoration: none;
-            color: var(--text-color);
-            font-weight: 500;
-            transition: color 0.2s ease;
-        }
-
-        .nav-link:hover, .nav-link.active {
-            color: var(--primary-color);
-        }
-
-        .main-content {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 30px;
-        }
-
-        .action-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .card {
-            background-color: var(--card-bg);
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s ease;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-        }
-
-        .card-icon {
-            font-size: 50px;
-            margin-bottom: 15px;
-            color: var(--primary-color);
-        }
-
-        .card-title {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-        }
-
-        .card-description {
-            color: #777;
+            justify-content: center;
             margin-bottom: 20px;
         }
-
-        .action-btn {
-            background-color: var(--primary-color);
+        .mode-buttons button {
+            background: none;
+            border: none;
             color: white;
+            margin: 0 10px;
+            cursor: pointer;
+            opacity: 0.7;
+        }
+        .mode-buttons button.active {
+            opacity: 1;
+            font-weight: bold;
+        }
+        .start-btn {
+            background-color: white;
+            color: #d95550;
             border: none;
             padding: 10px 20px;
-            border-radius: 6px;
-            font-weight: 600;
+            border-radius: 5px;
             cursor: pointer;
-            transition: all 0.2s ease;
         }
-
-        .action-btn:hover {
-            background-color: #e55a40;
-            transform: translateY(-2px);
+        .task-section {
+            margin-top: 20px;
         }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .navbar {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .action-cards {
-                grid-template-columns: 1fr;
-            }
+        .task-input {
+            display: flex;
+            margin-bottom: 10px;
         }
-
-        /* Dark Mode */
-        body.dark-mode {
-            --primary-color: #ff7f50;
-            --secondary-color: #6ab0ff;
-            --background-color: #222;
-            --text-color: #f5f5f5;
-            --card-bg: #333;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        .task-input input {
+            flex-grow: 1;
+            padding: 5px;
+            margin-right: 10px;
+        }
+        .task-list {
+            text-align: left;
+        }
+        .task-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        .task-item input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        .task-item.completed span {
+            text-decoration: line-through;
+            color: #888;
+        }
+        .delete-task {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            margin-left: 10px;
         }
     </style>
 </head>
 <body>
-    <!-- Welcome Page -->
-    <div id="welcome-page" class="welcome-container">
-        <div class="logo-container">
-            <div class="logo">
-                <div class="logo-icon">⏱️</div>
-            </div>
-            <h1 class="title">PomodoroFocus</h1>
-            <p class="subtitle">Boost your productivity with the Pomodoro technique</p>
+    <div class="container">
+        <div class="mode-buttons">
+            <button id="pomodoroMode" class="active">Pomodoro</button>
+            <button id="shortBreakMode">Short Break</button>
+            <button id="longBreakMode">Long Break</button>
         </div>
-        <div class="auth-container">
-            <button class="auth-btn" id="login-btn">Login</button>
-            <button class="auth-btn" id="signup-btn">Sign Up</button>
-            <button class="guest-btn" id="guest-btn">Continue as Guest</button>
-        </div>
-    </div>
-
-    <!-- Home Page -->
-    <div id="home-page" class="container" style="display: none;">
-        <nav class="navbar">
-            <div class="nav-logo">
-                <span>⏱️</span>
-                <span>PomodoroFocus</span>
+        
+        <div class="timer" id="timer">25:00</div>
+        
+        <button class="start-btn" id="startBtn">START</button>
+        
+        <div class="task-section">
+            <div class="task-input">
+                <input type="text" id="taskInput" placeholder="Add a task">
+                <button id="addTaskBtn">+</button>
             </div>
-            <div class="nav-links">
-                <a href="#" class="nav-link active">Home</a>
-                <a href="#" class="nav-link">Settings</a>
-                <a href="#" class="nav-link">Menu</a>
-            </div>
-        </nav>
-
-        <div class="main-content">
-            <div class="action-cards">
-                <div class="card" id="pomodoro-card">
-                    <div class="card-icon">⏱️</div>
-                    <h2 class="card-title">Start Pomodoro Session</h2>
-                    <p class="card-description">Focus on your tasks with timed work sessions</p>
-                    <button class="action-btn">Start Session</button>
-                </div>
-                
-                <div class="card" id="journal-card">
-                    <div class="card-icon">📝</div>
-                    <h2 class="card-title">Journal</h2>
-                    <p class="card-description">Log your productivity and energy levels</p>
-                    <button class="action-btn">Open Journal</button>
-                </div>
-                
-                <div class="card" id="stats-card">
-                    <div class="card-icon">📊</div>
-                    <h2 class="card-title">Statistics</h2>
-                    <p class="card-description">View graphical progress of your tasks</p>
-                    <button class="action-btn">View Stats</button>
-                </div>
-            </div>
+            <div class="task-list" id="taskList"></div>
         </div>
     </div>
 
     <script>
-        // DOM Elements
-        const welcomePage = document.getElementById('welcome-page');
-        const homePage = document.getElementById('home-page');
-        const loginBtn = document.getElementById('login-btn');
-        const signupBtn = document.getElementById('signup-btn');
-        const guestBtn = document.getElementById('guest-btn');
+        class PomodoroTimer {
+            constructor() {
+                this.timer = document.getElementById('timer');
+                this.startBtn = document.getElementById('startBtn');
+                this.taskInput = document.getElementById('taskInput');
+                this.addTaskBtn = document.getElementById('addTaskBtn');
+                this.taskList = document.getElementById('taskList');
 
-        // Navigation between pages
-        function showHomePage() {
-            welcomePage.style.display = 'none';
-            homePage.style.display = 'block';
+                this.modes = {
+                    pomodoro: 25 * 60,
+                    shortBreak: 5 * 60,
+                    longBreak: 15 * 60
+                };
+
+                this.currentMode = 'pomodoro';
+                this.timeRemaining = this.modes.pomodoro;
+                this.isRunning = false;
+                this.intervalId = null;
+
+                this.initEventListeners();
+            }
+
+            initEventListeners() {
+                // Mode buttons
+                document.getElementById('pomodoroMode').addEventListener('click', () => this.setMode('pomodoro'));
+                document.getElementById('shortBreakMode').addEventListener('click', () => this.setMode('shortBreak'));
+                document.getElementById('longBreakMode').addEventListener('click', () => this.setMode('longBreak'));
+
+                // Start/Pause button
+                this.startBtn.addEventListener('click', () => this.toggleTimer());
+
+                // Task input
+                this.addTaskBtn.addEventListener('click', () => this.addTask());
+                this.taskInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') this.addTask();
+                });
+            }
+
+            setMode(mode) {
+                // Remove active class from all mode buttons
+                ['pomodoroMode', 'shortBreakMode', 'longBreakMode'].forEach(id => {
+                    document.getElementById(id).classList.remove('active');
+                });
+
+                // Add active class to selected mode
+                document.getElementById(`${mode}Mode`).classList.add('active');
+
+                // Stop current timer
+                this.stopTimer();
+
+                // Set new mode and time
+                this.currentMode = mode;
+                this.timeRemaining = this.modes[mode];
+                this.updateTimerDisplay();
+            }
+
+            toggleTimer() {
+                if (this.isRunning) {
+                    this.stopTimer();
+                } else {
+                    this.startTimer();
+                }
+            }
+
+            startTimer() {
+                this.isRunning = true;
+                this.startBtn.textContent = 'PAUSE';
+                this.intervalId = setInterval(() => {
+                    this.timeRemaining--;
+                    this.updateTimerDisplay();
+
+                    if (this.timeRemaining <= 0) {
+                        this.stopTimer();
+                        // Optional: Add sound or notification
+                    }
+                }, 1000);
+            }
+
+            stopTimer() {
+                this.isRunning = false;
+                this.startBtn.textContent = 'START';
+                clearInterval(this.intervalId);
+            }
+
+            updateTimerDisplay() {
+                const minutes = Math.floor(this.timeRemaining / 60);
+                const seconds = this.timeRemaining % 60;
+                this.timer.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }
+
+            addTask() {
+                const taskText = this.taskInput.value.trim();
+                if (taskText) {
+                    const taskItem = document.createElement('div');
+                    taskItem.classList.add('task-item');
+                    taskItem.innerHTML = `
+                        <input type="checkbox">
+                        <span>${taskText}</span>
+                        <button class="delete-task">🗑️</button>
+                    `;
+
+                    const checkbox = taskItem.querySelector('input[type="checkbox"]');
+                    const span = taskItem.querySelector('span');
+                    const deleteBtn = taskItem.querySelector('.delete-task');
+
+                    checkbox.addEventListener('change', () => {
+                        taskItem.classList.toggle('completed');
+                    });
+
+                    deleteBtn.addEventListener('click', () => {
+                        this.taskList.removeChild(taskItem);
+                    });
+
+                    this.taskList.appendChild(taskItem);
+                    this.taskInput.value = '';
+                }
+            }
         }
 
-        // Event Listeners
-        loginBtn.addEventListener('click', () => {
-            // In a real app, you would show login form
-            // For demo, just redirect to home page
-            showHomePage();
-        });
-
-        signupBtn.addEventListener('click', () => {
-            // In a real app, you would show signup form
-            // For demo, just redirect to home page
-            showHomePage();
-        });
-
-        guestBtn.addEventListener('click', () => {
-            showHomePage();
-        });
-
-        // Card click handlers
-        document.getElementById('pomodoro-card').addEventListener('click', function() {
-            // Redirect to timer page (would be implemented in Flask)
-            console.log('Redirecting to timer page');
-            // window.location.href = '/timer';
-        });
-
-        document.getElementById('journal-card').addEventListener('click', function() {
-            // Redirect to journal page
-            console.log('Redirecting to journal page');
-            // window.location.href = '/journal';
-        });
-
-        document.getElementById('stats-card').addEventListener('click', function() {
-            // Redirect to stats page
-            console.log('Redirecting to statistics page');
-            // window.location.href = '/statistics';
-        });
-
-        // Theme toggle function (can be connected to settings later)
-        function toggleDarkMode() {
-            document.body.classList.toggle('dark-mode');
-        }
-
-        // For demo, you can try the dark mode by uncommenting the line below
-        // toggleDarkMode();
+        // Initialize the Pomodoro Timer
+        new PomodoroTimer();
     </script>
 </body>
 </html>

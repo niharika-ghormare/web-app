@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Session Review - PomodoroFocus</title>
+    <link rel="stylesheet" href="\static\css\style.css">
+    <script>
+        // When the user clicks on <div>, open the popup
+        function setting() {
+          var popup = document.getElementById("myPopup");
+          popup.classList.toggle("show");
+        }
+    </script>
+    <style>
+        .review-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .session-summary {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .summary-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background-color: #f9f9f9;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .completed-tasks {
+            margin-bottom: 2rem;
+        }
+        
+        .task-item {
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            background-color: #f5f5f5;
+            border-radius: 4px;
+        }
+        
+        .task-item.completed {
+            text-decoration: line-through;
+            color: #777;
+        }
+        
+        .productivity-score {
+            font-size: 1.5rem;
+            text-align: center;
+            margin: 2rem 0;
+            padding: 1rem;
+            background-color: #f0f8ff;
+            border-radius: 8px;
+        }
+        
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+        
+        .action-btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .primary-btn {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .secondary-btn {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar">
+            <div class="nav-logo">
+                <span>⏱️</span>
+                <span>PomodoroFocus</span>
+            </div>
+            <div class="nav-links">
+                <a href="\home" class="nav-link">Home</a>
+                <a href="#" class="nav-link" id="settings-link">Settings</a>
+            </div>
+        </nav>
+        <div id="settings-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn" id="close-modal">&times;</span>
+                <h2>Settings</h2>
+                <!-- Authentication section -->
+                <div class="auth-section">
+                    <h3>Account</h3>
+                    <div id="login-status">
+                        <!-- This will be dynamically filled based on auth status -->
+                    </div>
+                </div>
+                <h3>Select Theme Color</h3>
+        
+                <div class="color-options">
+                    <div class="color-option selected" data-theme="light" style="background-color: #f8f9fa;"></div>
+                    <div class="color-option" data-theme="dark" style="background-color: #222233;"></div>
+                    <div class="color-option" data-theme="focus" style="background-color: #103040;"></div>
+                    <div class="color-option" data-theme="nature" style="background-color: #f2f7ee;"></div>
+                    <div class="color-option" data-theme="nature" style="background-color: #96bdcf;"></div>
+                </div>
+                <button class="save-button">Save Theme</button>
+                
+            </div>
+        </div>
+        
+        <div class="review-container">
+            <div class="session-summary">
+                <div class="summary-header">
+                    <h1>Session Review</h1>
+                    <div class="session-date" id="session-date">March 7, 2025</div>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="focus-time">0</div>
+                        <div class="stat-label">Minutes Focused</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="completed-tasks">0</div>
+                        <div class="stat-label">Tasks Completed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="focus-sessions">0</div>
+                        <div class="stat-label">Focus Sessions</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="interruptions">0</div>
+                        <div class="stat-label">Interruptions</div>
+                    </div>
+                </div>
+                
+                <h2>Session Details</h2>
+                <div class="session-details" id="session-details">
+                    <!-- Session details will be inserted here -->
+                </div>
+            </div>
+            
+            <div class="task-section">
+                <h2>Task Summary</h2>
+                <div class="task-filters">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="completed">Completed</button>
+                    <button class="filter-btn" data-filter="active">Incomplete</button>
+                </div>
+                
+                <ul id="review-task-list" class="task-list">
+                    <!-- Tasks will be populated here -->
+                </ul>
+                
+                <div id="no-tasks-message" style="display: none; text-align: center; padding: 1rem;">
+                    No tasks were created for this session.
+                </div>
+            </div>
+            
+            <div class="productivity-score">
+                <h3>Productivity Score</h3>
+                <div id="productivity-score">85%</div>
+                <p id="productivity-message">Great job! You were very productive today.</p>
+            </div>
+            
+            
+        </div>
+    </div>
+    
+    <script src="/static/js/review.js"></script>
+    <script src="/static/js/setting.js"></script>
+</body>
+</html>

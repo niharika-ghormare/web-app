@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pomodoro Timer</title>
     <link rel="stylesheet" href="\static\css\style.css">
+    <script>
+        // When the user clicks on <div>, open the popup
+        function setting() {
+          var popup = document.getElementById("myPopup");
+          popup.classList.toggle("show");
+        }
+    </script>
+
 </head>
 <body>
     <div class="container">
@@ -14,25 +22,100 @@
                 <span>PomodoroFocus</span>
             </div>
             <div class="nav-links">
-                <a href="\templates\home.html" class="nav-link active">Home</a>
+                <a href="\home" class="nav-link active">Home</a>
                 <a href="#" class="nav-link" id="settings-link">Settings</a>
             </div>
         </nav>
+        <div id="settings-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn" id="close-modal">&times;</span>
+                <h2>Settings</h2>
+                <!-- Authentication section -->
+                <div class="auth-section">
+                    <h3>Account</h3>
+                    <div id="login-status">
+                        <!-- This will be dynamically filled based on auth status -->
+                    </div>
+                </div>
+                <h3>Select Theme Color</h3>
+        
+                <div class="color-options">
+                    <div class="color-option selected" data-theme="light" style="background-color: #f8f9fa;"></div>
+                    <div class="color-option" data-theme="dark" style="background-color: #222233;"></div>
+                    <div class="color-option" data-theme="focus" style="background-color: #103040;"></div>
+                    <div class="color-option" data-theme="nature" style="background-color: #f2f7ee;"></div>
+                    <div class="color-option" data-theme="nature" style="background-color: #96bdcf;"></div>
+                </div>
+                <button class="save-button">Save Theme</button>
+                
+            </div>
+        </div>
         
         <div class="timer-container">
             <div class="timer-card">
+            
                 <h2 class="timer-label" id="session-type">Focus Session</h2>
+                <div class="timer-mode-selector">
+                    <button class="mode-btn active" data-mode="focus">Pomodoro</button>
+                    <button class="mode-btn" data-mode="shortBreak">Short Break</button>
+                    <button class="mode-btn" data-mode="longBreak">Long Break</button>
+                </div>
+                
                 <div class="timer-display" id="timer">25:00</div>
+                
                 <div class="timer-progress">
                     <div class="timer-progress-bar" id="progress-bar" style="width: 0%"></div>
                 </div>
                 <div class="timer-controls">
                     <button class="timer-btn pause-btn" id="pause-btn">Start</button>
                     <button class="timer-btn add-time-btn" id="add-time-btn">+5 Minutes</button>
-                    <button class="timer-btn finish-btn" id="finish-btn">Finish Early</button>
+                    <button class="timer-btn finish-btn" id="finish-btn">Finish Early</button>  
                 </div>
-                <div class="session-info">
-                    Session <span id="current-session">1</span> of <span id="total-sessions">4</span> • Break in <span id="break-time">25:00</span>
+                <div class="task-section">
+                    <div class="task-header">
+                        <h1 class="task-title">My Tasks</h1>
+                    </div>
+
+                    
+                    <div class="task-filters">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="active">Active</button>
+                        <button class="filter-btn" data-filter="completed">Completed</button>
+                    </div>
+
+    
+                    <form id="task-form" class="task-form">
+                        <input type="text" id="task-input" class="task-input" placeholder="Add a new task...">
+                        <button type="submit" class="add-task-btn">
+                            <i class="fas fa-plus"></i> Add Task
+                        </button>
+                    </form>
+    
+                    <ul id="task-list" class="task-list">
+                        <!-- Tasks will be added here dynamically -->
+                    </ul>
+    
+                    <div class="empty-state" id="empty-tasks" style="display: none;">
+                        <i class="fas fa-tasks empty-icon"></i>
+                        <p class="empty-description">Create your first task to get started</p>
+                        
+                    </div>
+                    <div class="task-stats">
+                        <div class="stats-item">
+                            <span class="stats-value" id="active-tasks">0</span>
+                            <span class="stats-label">Active</span>
+                        </div>
+                        <div class="stats-item">
+                            <span class="stats-value" id="completed-tasks">0</span>
+                            <span class="stats-label">Completed</span>
+                        </div>
+                        <div class="stats-item">
+                            <span class="stats-value" id="total-tasks">0</span>
+                            <span class="stats-label">Total</span>
+                        </div>
+                    </div>
+    
+                    
                 </div>
                 <a href="#" class="settings-link" id="settings-link">Customize Timer Settings</a>
             </div>
@@ -71,6 +154,7 @@
         </div>
     </div>
 
-    <script src="/static/js/script.js"></script>
+    <script src="/static/js/timer.js"></script>
+    <script src="/static/js/setting.js"></script>
 </body>
 </html>
