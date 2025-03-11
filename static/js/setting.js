@@ -71,7 +71,7 @@
             // Remove all theme classes from document root
             document.documentElement.classList.remove(
                 'theme-light', 
-                'theme-dark', 
+                'theme-softred', 
                 'theme-focus', 
                 'theme-nature',
                 'theme-sun'
@@ -91,7 +91,7 @@
         // Remove all theme classes from document root
         document.documentElement.classList.remove(
             'theme-light', 
-            'theme-dark', 
+            'theme-softred', 
             'theme-focus', 
             'theme-nature',
             'theme-sun'
@@ -108,12 +108,53 @@
     // Get theme colors based on theme name
     function getThemeColors(theme) {
         const themeMap = {
-            'light': {primary: '#ecc86e', secondary: '#c49a3f', background: '#ecc86e', text: '#4a3e2a',card: '#ffffff'},
-            'dark': { primary: '#1a1a2e', secondary: '#4a4a6a', background: '#2d2d42', text: '#333333', card: '#ffffff' },
-            'focus': { primary: '#143f5a', secondary: '#8fbcd4', background: '#1c4b65', text: '#333333', card: '#ffffff' },
-            'nature': { primary: '#2d4a22', secondary: '#a0cf95', background: '#2d4a22', text: '#333333', card: '#ffffff' },
-            'sun': { primary: '#2c3e50', secondary: '#bdc3c7', background: '#2c3e50', text: '#2d3436', card: '#ffffff' }
+            'light': { 
+                primary: '#ecc86e', 
+                secondary: '#c49a3f', 
+                background: '#f9e5b8',  // Lighter than primary
+                text: '#4a3e2a',
+                card: '#ffffff',
+                logo: '#2c3e50',
+                button: '#2c3e50'
+            },
+            'softred': { 
+                primary: '#d86f6f',  // Warm muted red
+                secondary: '#f2a1a1',  // Soft pastel red
+                background: '#f8dada',  // Very light pinkish-red
+                text: '#732626',  // Deep red-brown for readability
+                card: '#ffffff',  // Clean white cards
+                logo: '#d86f6f',  // Matches primary color
+                button: '#b85656'  // Slightly darker red for contrast
+            },
+            'focus': { 
+                primary: '#5a3f72',       // Deep lavender
+                secondary: '#b89ccf',     // Soft pastel lavender
+                background: '#d8c4e6',    // Light lavender background
+                text: '#2e2e2e',          // Dark gray for contrast and readability
+                card: '#ffffff',          // Slightly darker than secondary for depth
+                logo: '#b89ccf',          // Matches secondary
+                button: '#5a3f72' 
+            },
+            'nature': { 
+                primary: '#2d4a22', 
+                secondary: '#a0cf95', 
+                background: '#5a7f58',  // Lighter than primary
+                text: '#333333',
+                card: '#ffffff',
+                logo: '#a0cf95',
+                button: '#2d4a22'
+            },
+            'sun': { 
+                primary: '#2c3e50', 
+                secondary: '#bdc3c7', 
+                background: '#546e87',  // Lighter than primary
+                text: '#2d3436',
+                card: '#ffffff',
+                logo: '#f39c12',
+                button: '#2c3e50'
+            }
         };
+        
         
         return themeMap[theme] || themeMap['sun']; // Default to light theme if theme not found
     }

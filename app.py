@@ -1,3 +1,4 @@
+
 from flask import Flask, request, jsonify, render_template, redirect, url_for, flash, session
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager, create_access_token
@@ -13,7 +14,7 @@ from datetime import datetime
 app = Flask(__name__)
 CORS(app)
 # Secure MongoDB connection
-MONGO_URI = os.getenv("MONGO_URI", "")
+MONGO_URI = os.getenv("MONGO_URI", "mongodb+srv://niharikaghormare123:niharikaghormaere123@cluster0.vuvza.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 client = MongoClient(MONGO_URI)
 db = client["Webapp"]  # Database name
 users_collection = db["Data"]  # Collection for storing users
