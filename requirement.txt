@@ -1,0 +1,5 @@
+Flask
+pymongo
+Flask-Session
+dnspython
+pytz
